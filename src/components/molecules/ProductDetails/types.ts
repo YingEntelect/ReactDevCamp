@@ -1,4 +1,5 @@
-type Product = {
+//TODO: move definition to query level once we get to that milestone
+export type Product = {
     id: number
     name: string
     description: string

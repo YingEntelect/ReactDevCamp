@@ -1,22 +1,142 @@
+import { useEffect, useRef } from "react";
+
 import "./App.css";
 import sampleProductImage from "./assets/sample-product.png";
-import { ProductDetails } from "./components";
+import {
+  ProductDetails,
+  ProductTile,
+  ShoppingFooter,
+  type Product,
+} from "./components";
+
+const sampleProduct: Product = {
+  id: 0,
+  name: "Islamic Investment Product",
+  description:
+    "Provides a way for Islamic customers to invest their money in a manner that is fully compliant with Shariah principles. Our comprehensive coverage ensures that your investment is managed according to ethical, interest-free guidelines from day one.\n\nFunds are allocated exclusively to Shariah-compliant assets, avoiding industries such as alcohol, gambling, and conventional interest-bearing instruments. A dedicated Shariah advisory board reviews the underlying portfolio on an ongoing basis to ensure continued compliance.\n\nCustomers can choose between fixed and flexible contribution terms, with returns distributed on a profit-sharing basis rather than fixed interest. Early withdrawal options are available, subject to standard notice periods.\n\nTo qualify, customers must be at least 18 years old, a South African resident, and hold an account with us in good standing. Additional documentation may be required to verify eligibility under Shariah investment guidelines.",
+  price: 350,
+  imageUrl: sampleProductImage,
+};
+
+const sampleProductArray: Product[] = [
+  {
+    id: 1,
+    name: "Retail Short Term Insurance",
+    description:
+      "Provides cover for short-term products for individuals - Electronics, Household Items, Jewellery, Cars etc.",
+    price: 500,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 2,
+    name: "Retail Long-Term Insurance",
+    description:
+      "Provides cover for longer term products individuals - household insurance, life insurance etc.",
+    price: 1000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 3,
+    name: "Commercial Short Term Insurance",
+    description:
+      "Provides cover for short-term products for commercial entities - Printers, Company Cars, Theft, etc.",
+    price: 5000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 4,
+    name: "Commercial Long-Term Insurance",
+    description:
+      "Provides cover for longer term products - office insurance, employee benefit insurance, etc.",
+    price: 10000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 5,
+    name: "Device Contract",
+    description:
+      "Allows the customer to take out a device on contract - such as a phone, laptop etc.",
+    price: 850,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 6,
+    name: "Short-Term Investment Product",
+    description:
+      "Provides a way for customers to invest their money over a short period of time - 32 day fixed deposit etc.",
+    price: 2500,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 7,
+    name: "Long-Term Investment Product",
+    description:
+      "Provides a way for users to invest their money over the long term - Retirement / Annuity Funds, Unit Trusts etc.",
+    price: 5000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 8,
+    name: "Islamic Investment Product",
+    description: "Provides a way for Islamic customers to invest their money.",
+    price: 5000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 9,
+    name: "VIP Investment Product",
+    description:
+      "Provides an Investment product for VIP customers over 150 Million Net-Asset Value.",
+    price: 20000,
+    imageUrl: sampleProductImage,
+  },
+  {
+    id: 10,
+    name: "Home Loan Product",
+    description:
+      "Provides a way for customers to finance the purchase of residential property over an extended term.",
+    price: 15000,
+    imageUrl: sampleProductImage,
+  },
+];
 
 export const App = () => {
-  const sampleProduct = {
-    id: 0,
-    name: "Islamic Investment Product",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
-    price: 350,
-    imageUrl: sampleProductImage,
-  };
+  const relatedProductsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = relatedProductsRef.current;
+    if (!container) return;
+
+    const handleWheel = (event: WheelEvent) => {
+      if (event.deltaY === 0) return;
+      event.preventDefault();
+      container.scrollLeft += event.deltaY;
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+    return () => container.removeEventListener("wheel", handleWheel);
+  }, []);
 
   return (
-    <div className="p-5 flex flex-col space-y-5">
-      <ProductDetails product={sampleProduct} />
-      <hr className="border-[#D9D9D9]" />
-      <span className="text-xl font-bold">Related product</span>
+    <div className="flex flex-col h-lvh justify-between">
+      <div className="h-full relative overflow-scroll mb-16">
+        <div className="p-5 flex flex-col space-y-5">
+          <ProductDetails product={sampleProduct} />
+          <hr className="border-[#D9D9D9]" />
+          <span className="text-xl font-bold">Related product</span>
+          <div
+            ref={relatedProductsRef}
+            className="flex flex-row w-full overflow-scroll space-x-3"
+          >
+            {sampleProductArray.map((product) => (
+              <div key={product.id}>
+                <ProductTile product={product} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <ShoppingFooter />
     </div>
   );
 };
