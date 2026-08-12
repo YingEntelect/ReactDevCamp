@@ -1,7 +1,8 @@
 import type { FC } from "react";
 
+import { ProductImage } from "@project/components";
+
 import type { ProductTileProps } from "./types";
-import { ProductImage } from "../../atoms";
 
 export const ProductTile: FC<ProductTileProps> = ({ product }) => {
   return (

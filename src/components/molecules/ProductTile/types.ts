@@ -1,5 +1,5 @@
-import type { Product } from "../ProductDetails"
+import type { Product } from "@project/components";
 
 export type ProductTileProps = {
-    product: Product
-}
+  product: Product;
+};

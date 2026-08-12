@@ -5,7 +5,7 @@ import {
   ProductTile,
   ShoppingFooter,
   type Product,
-} from "./components";
+} from "@project/components";
 
 const sampleProduct: Product = {
   id: 0,

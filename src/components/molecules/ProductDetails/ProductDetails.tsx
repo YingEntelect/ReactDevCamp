@@ -1,8 +1,11 @@
 import type { FC } from "react";
 
-import type { ProductDetailsProps } from "./types";
+import {
+  CollapsibleProductDescription,
+  ProductImage,
+} from "@project/components";
 
-import { CollapsibleProductDescription, ProductImage } from "../..";
+import type { ProductDetailsProps } from "./types";
 
 export const ProductDetails: FC<ProductDetailsProps> = ({ product }) => (
   <div className="space-y-5 flex flex-col w-full max-w-250">
