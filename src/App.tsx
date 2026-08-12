@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import "./App.css";
 import sampleProductImage from "./assets/sample-product.png";
 import {
@@ -101,41 +99,20 @@ const sampleProductArray: Product[] = [
 ];
 
 export const App = () => {
-  const relatedProductsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = relatedProductsRef.current;
-    if (!container) return;
-
-    const handleWheel = (event: WheelEvent) => {
-      if (event.deltaY === 0) return;
-      event.preventDefault();
-      container.scrollLeft += event.deltaY;
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    return () => container.removeEventListener("wheel", handleWheel);
-  }, []);
-
   return (
-    <div className="flex flex-col h-lvh justify-between">
-      <div className="h-full relative overflow-scroll mb-16">
+    <div className="flex flex-col h-dvh">
+      <main className="flex-1 min-h-0 overflow-y-auto">
         <div className="p-5 flex flex-col space-y-5">
           <ProductDetails product={sampleProduct} />
           <hr className="border-[#D9D9D9]" />
-          <span className="text-xl font-bold">Related product</span>
-          <div
-            ref={relatedProductsRef}
-            className="flex flex-row w-full overflow-scroll space-x-3"
-          >
+          <h2 className="text-xl font-bold">Related product</h2>
+          <div className="flex flex-row w-full overflow-x-auto space-x-3 snap-x snap-proximity">
             {sampleProductArray.map((product) => (
-              <div key={product.id}>
-                <ProductTile product={product} />
-              </div>
+              <ProductTile product={product} key={product.id} />
             ))}
           </div>
         </div>
-      </div>
+      </main>
       <ShoppingFooter />
     </div>
   );

@@ -5,6 +5,7 @@ import type { ProductImageProps } from "./types";
 export const ProductImage: FC<ProductImageProps> = ({
   imageUrl,
   percentageDiscount,
+  alt,
 }) => (
   <div className="w-full h-full relative bg-white flex items-center justify-center">
     {!!percentageDiscount && (
@@ -12,6 +13,6 @@ export const ProductImage: FC<ProductImageProps> = ({
         <span className="text-white text-center w-10">{`${percentageDiscount}% OFF`}</span>
       </div>
     )}
-    <img src={imageUrl} className="w-full h-full object-cover" />
+    <img src={imageUrl} className="w-full h-full object-cover" alt={alt} />
   </div>
 );

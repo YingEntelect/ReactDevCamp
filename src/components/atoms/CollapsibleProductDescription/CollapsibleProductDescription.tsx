@@ -13,10 +13,11 @@ export const CollapsibleProductDescription: FC<
     <p
       className={`whitespace-pre-line relative ${expanded ? "pb-7" : "line-clamp-3"}`}
     >
-      <span
+      <button
         className={`w-fit text-blue-500 ${expanded ? "left-0" : "right-0"} bottom-0 absolute bg-white backdrop-blur-3xl cursor-pointer`}
         onClick={toggleExpanded}
-      >{`${expanded ? "Read less" : "... Read more"}`}</span>
+        aria-expanded={expanded}
+      >{`${expanded ? "Read less" : "... Read more"}`}</button>
       {description}
     </p>
   );
