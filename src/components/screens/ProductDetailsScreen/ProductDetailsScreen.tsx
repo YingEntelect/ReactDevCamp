@@ -6,7 +6,7 @@ import {
   ShoppingFooter,
   type Product,
 } from "@project/components";
-import sampleProductImage from "./assets/sample-product.png";
+import sampleProductImage from "@project/assets/sample-product.png";
 
 export const ProductDetailsScreen: FC = () => {
   const sampleProduct: Product = {
