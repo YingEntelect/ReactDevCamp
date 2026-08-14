@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import { BrowserRouter } from "react-router";
 
-import { useAuth } from "@project/contexts";
+import { useAuthToken } from "@project/hooks";
 
 import { AuthRouter } from "../AuthRouter";
 import { UnauthRouter } from "../UnauthRouter";
 
 export const RootRouter: FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthToken();
 
   return (
     <BrowserRouter>

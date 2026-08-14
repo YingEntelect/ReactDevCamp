@@ -14,4 +14,12 @@ export default defineConfig({
       "@project": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/v1": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+    },
+  },
 });
