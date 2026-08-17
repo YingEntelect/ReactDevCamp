@@ -1,5 +1,5 @@
-import type { Product } from "@project/components";
+import type { ProductResponseModelType } from "@project/services";
 
 export type ProductTileProps = {
-  product: Product;
+  product: ProductResponseModelType;
 };

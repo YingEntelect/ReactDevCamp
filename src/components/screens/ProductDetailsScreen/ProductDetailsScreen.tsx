@@ -4,12 +4,12 @@ import {
   ProductDetails,
   ProductTile,
   ShoppingFooter,
-  type Product,
 } from "@project/components";
 import sampleProductImage from "@project/assets/sample-product.png";
+import type { ProductResponseModelType } from "@project/services/Products/types";
 
 export const ProductDetailsScreen: FC = () => {
-  const sampleProduct: Product = {
+  const sampleProduct: ProductResponseModelType = {
     id: 0,
     name: "Islamic Investment Product",
     description:
@@ -18,7 +18,7 @@ export const ProductDetailsScreen: FC = () => {
     imageUrl: sampleProductImage,
   };
 
-  const sampleProductArray: Product[] = [
+  const sampleProductArray: ProductResponseModelType[] = [
     {
       id: 1,
       name: "Retail Short Term Insurance",

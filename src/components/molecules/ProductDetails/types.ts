@@ -1,12 +1,5 @@
-//TODO: move definition to query level once we get to that milestone
-export type Product = {
-    id: number
-    name: string
-    description: string
-    price: number
-    imageUrl: string
-}
+import type { ProductResponseModelType } from "@project/services/Products/types";
 
 export type ProductDetailsProps = {
-    product: Product
-}
+  product: ProductResponseModelType;
+};
