@@ -12,7 +12,7 @@ import { loginFormSchema, type LoginFormValues } from "./types";
 export const LoginForm: FC = () => {
   const { mutate: login, error, isPending } = useLoginMutation();
 
-  const { handleSubmit, handleChange, isValid, errors } =
+  const { handleSubmit, handleChange, isValid, errors, touched, handleBlur } =
     useFormik<LoginFormValues>({
       initialValues: {
         username: "",
@@ -30,6 +30,7 @@ export const LoginForm: FC = () => {
     <form
       onSubmit={handleSubmit}
       className="space-y-5 flex flex-col justify-center items-center"
+      noValidate
     >
       <div className="w-full">
         <FloatingLabel
@@ -37,15 +38,59 @@ export const LoginForm: FC = () => {
           label="Username"
           name="username"
           variant="outlined"
+          autoComplete="username"
+          required
+          aria-required="true"
           onChange={handleChange}
-          color={errors.username !== undefined ? "error" : "default"}
+          onBlur={handleBlur}
+          color={
+            touched.username && errors.username !== undefined
+              ? "error"
+              : "default"
+          }
+          aria-invalid={touched.username && errors.username !== undefined}
+          aria-describedby={
+            touched.username && errors.username ? "username-error" : undefined
+          }
         />
+        {touched.username && errors.username && (
+          <p
+            id="username-error"
+            role="alert"
+            className="mt-1 text-sm text-red-500"
+          >
+            {errors.username}
+          </p>
+        )}
       </div>
-      <PasswordInput
-        onChange={handleChange}
-        name="password"
-        color={errors.password !== undefined ? "error" : "default"}
-      />
+      <div className="w-full">
+        <PasswordInput
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="password"
+          autoComplete="current-password"
+          required
+          aria-required="true"
+          color={
+            touched.password && errors.password !== undefined
+              ? "error"
+              : "default"
+          }
+          aria-invalid={touched.password && errors.password !== undefined}
+          aria-describedby={
+            touched.password && errors.password ? "password-error" : undefined
+          }
+        />
+        {touched.password && errors.password && (
+          <p
+            id="password-error"
+            role="alert"
+            className="mt-1 text-sm text-red-500"
+          >
+            {errors.password}
+          </p>
+        )}
+      </div>
       {error && (
         <Toast>
           <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950 opacity-80 border border-red-900">

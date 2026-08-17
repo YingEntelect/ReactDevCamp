@@ -21,8 +21,10 @@ export const PasswordInput: FC<PasswordInputProps> = ({ ...props }) => {
         type="button"
         onClick={toggleShowPassword}
         className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+        aria-label="Show/Hide password"
+        aria-pressed={showPassword}
       >
-        <img src={toggleShowPasswordIcon} className="h-4" />
+        <img src={toggleShowPasswordIcon} className="h-4" alt="" />
       </button>
     </div>
   );
