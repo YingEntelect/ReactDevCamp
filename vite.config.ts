@@ -20,7 +20,7 @@ export default defineConfig({
         target: "http://localhost:8080",
         changeOrigin: true,
       },
-      "client/v1": {
+      "/client/v1": {
         target: "http://localhost:8080",
         changeOrigin: true,
       },

@@ -7,9 +7,13 @@ import { useLoginMutation } from "@project/hooks";
 
 import warningCircle from "@project/assets/warning-circle.svg";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { loginFormSchema, type LoginFormValues } from "./types";
+import {
+  loginFormSchema,
+  type LoginFormProps,
+  type LoginFormValues,
+} from "./types";
 
-export const LoginForm: FC = () => {
+export const LoginForm: FC<LoginFormProps> = ({ onSuccess }) => {
   const { mutate: login, error, isPending } = useLoginMutation();
 
   const { handleSubmit, handleChange, isValid, errors, touched, handleBlur } =
@@ -19,7 +23,7 @@ export const LoginForm: FC = () => {
         password: "",
       },
       onSubmit: ({ username, password }) => {
-        login({ username, password, rememberMe: false });
+        login({ username, password, rememberMe: false }, { onSuccess });
       },
       validationSchema: toFormikValidationSchema(loginFormSchema),
     });
