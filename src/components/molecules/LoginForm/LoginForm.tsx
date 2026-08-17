@@ -12,16 +12,17 @@ import { loginFormSchema, type LoginFormValues } from "./types";
 export const LoginForm: FC = () => {
   const { mutate: login, error, isPending } = useLoginMutation();
 
-  const { handleSubmit, handleChange, isValid } = useFormik<LoginFormValues>({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    onSubmit: ({ username, password }) => {
-      login({ username, password, rememberMe: false });
-    },
-    validationSchema: toFormikValidationSchema(loginFormSchema),
-  });
+  const { handleSubmit, handleChange, isValid, errors } =
+    useFormik<LoginFormValues>({
+      initialValues: {
+        username: "",
+        password: "",
+      },
+      onSubmit: ({ username, password }) => {
+        login({ username, password, rememberMe: false });
+      },
+      validationSchema: toFormikValidationSchema(loginFormSchema),
+    });
 
   const disabled = !isValid || isPending;
 
@@ -37,9 +38,14 @@ export const LoginForm: FC = () => {
           name="username"
           variant="outlined"
           onChange={handleChange}
+          color={errors.username !== undefined ? "error" : "default"}
         />
       </div>
-      <PasswordInput onChange={handleChange} name="password" />
+      <PasswordInput
+        onChange={handleChange}
+        name="password"
+        color={errors.password !== undefined ? "error" : "default"}
+      />
       {error && (
         <Toast>
           <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950 opacity-80 border border-red-900">

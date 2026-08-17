@@ -15,9 +15,19 @@ export const App = () => {
             md: "bg-[#1C2435] dark:bg-[#1C2435]",
           },
         },
+        error: {
+          outlined: {
+            md: "bg-[#1C2435] dark:bg-[#1C2435]",
+          },
+        },
       },
       input: {
         default: {
+          outlined: {
+            md: "border-2 rounded-sm border-[#E5E5EA]",
+          },
+        },
+        error: {
           outlined: {
             md: "border-2 rounded-sm border-[#E5E5EA]",
           },
