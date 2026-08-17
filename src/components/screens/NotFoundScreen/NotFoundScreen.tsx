@@ -8,7 +8,7 @@ export const NotFoundScreen: FC = () => (
       <p className="text-[#8E8E93] text-center">
         The page you were looking for doesn&apos;t exist or has moved.
       </p>
-      <Link to="/" className="text-blue-600 underline">
+      <Link to="/products" className="text-blue-600 underline">
         Back to products
       </Link>
     </main>

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 
 import { LoginForm } from "@project/components";
 import { useAuthToken } from "@project/hooks";
@@ -9,9 +9,11 @@ export const LoginScreen: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Set when the 401 interceptor routed the user here mid-flow, so signing in
+  // returns them to where they were. Otherwise start at the catalogue.
   const from =
     (location.state as { from?: { pathname?: string } } | null)?.from
-      ?.pathname ?? "/";
+      ?.pathname ?? "/products";
 
   if (isAuthenticated) {
     return <Navigate to={from} replace />;
@@ -19,8 +21,13 @@ export const LoginScreen: FC = () => {
 
   return (
     <div className="flex flex-col h-dvh bg-[#1C2435]">
-      <main className="flex-1 min-h-0 overflow-y-auto p-5">
+      <main className="flex-1 min-h-0 overflow-y-auto p-5 space-y-5">
         <LoginForm onSuccess={() => void navigate(from, { replace: true })} />
+        <div className="flex justify-center">
+          <Link to="/products" className="text-white underline">
+            Continue as a guest
+          </Link>
+        </div>
       </main>
     </div>
   );
