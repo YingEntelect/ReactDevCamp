@@ -1,8 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { login as authServiceLogin } from "@project/services";
+import {
+  login as authServiceLogin,
+  writeStoredToken,
+} from "@project/services";
 
-import { authTokenKey, TOKEN_STORAGE_KEY } from "./authTokenKey";
+import { authTokenKey } from "./authTokenKey";
 
 type LoginMutationVariables = {
   username: string;
@@ -28,11 +31,7 @@ export const useLoginMutation = () => {
       return { token: response.loginAccessKey, rememberMe };
     },
     onSuccess: ({ token, rememberMe }) => {
-      const storage = rememberMe ? localStorage : sessionStorage;
-      const otherStorage = rememberMe ? sessionStorage : localStorage;
-
-      otherStorage.removeItem(TOKEN_STORAGE_KEY);
-      storage.setItem(TOKEN_STORAGE_KEY, token);
+      writeStoredToken(token, rememberMe);
       queryClient.setQueryData(authTokenKey, token);
     },
   });

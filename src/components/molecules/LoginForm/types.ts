@@ -10,3 +10,8 @@ export const loginFormSchema = z.object({
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
+
+export type LoginFormProps = {
+  /** Called once the credentials are accepted and the token is stored. */
+  onSuccess?: () => void;
+};

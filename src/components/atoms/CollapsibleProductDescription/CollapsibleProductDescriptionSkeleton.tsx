@@ -9,4 +9,4 @@ export const CollapsibleProductDescriptionSkeleton: FC = () => (
   </div>
 );
 
-const skeletonLineBaseClass = "h-4 bg-slate-200 animate-pulse rounded-lg";
+const skeletonLineBaseClass = "h-4 bg-gray-300 animate-pulse rounded-lg";

@@ -9,7 +9,7 @@ import type { ProductDetailsProps } from "./types";
 
 export const ProductDetails: FC<ProductDetailsProps> = ({ product }) => (
   <div className="space-y-5 flex flex-col w-full max-w-250">
-    <div className="max-w-96">
+    <div className="max-w-96 h-80 rounded-lg overflow-hidden">
       <ProductImage
         imageUrl={product.imageUrl}
         percentageDiscount={30}

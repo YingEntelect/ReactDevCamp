@@ -1,10 +1,19 @@
 import type { FC } from "react";
 
+import { twMerge } from "flowbite-react/helpers/tailwind-merge";
+
 import { ProductImageSkeleton } from "@project/components";
 
-export const ProductTileSkeleton: FC = () => (
+import type { ProductTileSkeletonProps } from "./types";
+
+export const ProductTileSkeleton: FC<ProductTileSkeletonProps> = ({
+  containerClassName,
+}) => (
   <div
-    className="w-72 p-3 rounded-lg flex flex-col border-2 border-[#C7C7CC] items-start shrink-0 snap-start space-y-1"
+    className={twMerge(
+      "w-72 p-3 rounded-lg flex flex-col border-2 border-[#C7C7CC] cursor-pointer items-start shrink-0 snap-start space-y-1",
+      containerClassName,
+    )}
     aria-hidden
   >
     <div className="w-full items-center justify-center flex flex-row">
@@ -12,7 +21,7 @@ export const ProductTileSkeleton: FC = () => (
         <ProductImageSkeleton />
       </div>
     </div>
-    <div className="h-7 w-64 bg-slate-200 animate-pulse rounded-lg" />
-    <div className="h-6 w-36 bg-slate-200 animate-pulse rounded-lg" />
+    <div className="h-7 w-full max-w-4/5 bg-gray-300 animate-pulse rounded-lg" />
+    <div className="h-6 w-full max-w-3/5 bg-gray-300 animate-pulse rounded-lg" />
   </div>
 );
