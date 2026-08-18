@@ -8,8 +8,6 @@ export const productResponseModel = (
     name: data.name,
     description: data.description,
     price: data.price,
-    imageUrl: !data.imageUrl
-      ? "https://placehold.net/600x600.png"
-      : data.imageUrl,
+    imageUrl: !data.imageUrl ? "https://picsum.photos/200/300" : data.imageUrl,
   };
 };

@@ -1,11 +1,10 @@
-import { Button, FloatingLabel, Toast, ToastToggle } from "flowbite-react";
+import { Button, FloatingLabel } from "flowbite-react";
 import { useFormik } from "formik";
 import type { FC } from "react";
 
-import { PasswordInput } from "@project/components";
+import { ErrorToast, PasswordInput } from "@project/components";
 import { useLoginMutation } from "@project/hooks";
 
-import warningCircle from "@project/assets/warning-circle.svg";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import {
   loginFormSchema,
@@ -95,15 +94,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSuccess }) => {
           </p>
         )}
       </div>
-      {error && (
-        <Toast>
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950 opacity-80 border border-red-900">
-            <img src={warningCircle} className="h-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">{error.message}</div>
-          <ToastToggle />
-        </Toast>
-      )}
+      {error && <ErrorToast message={error.message} />}
       <Button
         type="submit"
         disabled={disabled}

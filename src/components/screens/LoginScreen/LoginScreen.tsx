@@ -9,8 +9,6 @@ export const LoginScreen: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Set when the 401 interceptor routed the user here mid-flow, so signing in
-  // returns them to where they were. Otherwise start at the catalogue.
   const from =
     (location.state as { from?: { pathname?: string } } | null)?.from
       ?.pathname ?? "/products";

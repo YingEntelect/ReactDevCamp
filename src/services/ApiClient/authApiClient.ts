@@ -3,9 +3,7 @@ import axios, { isAxiosError } from "axios";
 import { readStoredToken } from "../Auth/tokenStorage";
 import { notifyUnauthorized, resetUnauthorizedGuard } from "./unauthorized";
 
-export const authApiClient = axios.create({
-  baseURL: import.meta.env.VITE_CLIENT_API_URL,
-});
+export const authApiClient = axios.create();
 
 authApiClient.interceptors.request.use((config) => {
   const token = readStoredToken();

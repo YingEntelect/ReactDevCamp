@@ -11,7 +11,7 @@ export const ProductDetailsSkeleton: FC = () => (
       <ProductImageSkeleton />
     </div>
     <div className="flex flex-col w-full space-y-5">
-      <div className="bg-slate-200 animate-pulse rounded-lg h-9 w-1/2" />
+      <div className="bg-gray-300 animate-pulse rounded-lg h-9 w-1/2" />
       <CollapsibleProductDescriptionSkeleton />
     </div>
   </div>
