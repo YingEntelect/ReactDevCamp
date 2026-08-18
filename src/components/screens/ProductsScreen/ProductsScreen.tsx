@@ -6,6 +6,7 @@ import {
   ExpandableProductCarousel,
   ProductCatalogue,
   ErrorToast,
+  BottomNavBar,
 } from "@project/components";
 
 export const ProductsScreen: FC = () => {
@@ -22,6 +23,7 @@ export const ProductsScreen: FC = () => {
         <ExpandableProductCarousel products={data ?? []} loading={isFetching} />
         <ProductCatalogue products={data ?? []} loading={isFetching} />
       </main>
+      <BottomNavBar />
     </div>
   );
 };
