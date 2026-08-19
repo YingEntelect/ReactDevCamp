@@ -1,7 +1,7 @@
 export type FileUploadModalProps = {
   show?: boolean;
   onClose?: () => void;
-  onFileSelected: (file: File) => void;
+  onFileSelected: (file: File) => void | Promise<unknown>;
   progress?: number | null;
   error?: string | null;
   initialFile?: {
