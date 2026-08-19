@@ -2,7 +2,11 @@ import { useState, type FC } from "react";
 import { Link } from "react-router";
 
 import { ChevronButton, FileUploadModal } from "@project/components";
-import { useCustomerProfile, useKYCFileUpload } from "@project/hooks";
+import {
+  useCustomerProfile,
+  useKYCFilePreview,
+  useKYCFileUpload,
+} from "@project/hooks";
 import type { KycDocumentKind } from "@project/services";
 
 import kycBadge from "@project/assets/kyc-badge.png";
@@ -12,8 +16,18 @@ export const KYCSubmissionScreen: FC = () => {
   const [uploadMode, setUploadMode] =
     useState<KycDocumentKind>("proofOfResidence");
 
-  const { uploadFile, progress, error } = useKYCFileUpload();
+  const { uploadFile, progress, error: uploadError } = useKYCFileUpload();
   const { data: customer } = useCustomerProfile();
+  const { file, refetch } = useKYCFilePreview(customer?.id ?? -1, uploadMode);
+
+  const initialFile =
+    file.previewUrl && file.fileName && file.fileSize !== null
+      ? {
+          previewUrl: file.previewUrl,
+          fileName: file.fileName,
+          fileSize: file.fileSize,
+        }
+      : undefined;
 
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
@@ -35,6 +49,7 @@ export const KYCSubmissionScreen: FC = () => {
       await uploadFile(customer.id, uploadMode, file);
 
       setShowModal(false);
+      refetch();
     } catch {
       //error caught in useKYCFileUpload hook
     }
@@ -67,7 +82,8 @@ export const KYCSubmissionScreen: FC = () => {
           onClose={handleClose}
           onFileSelected={handleFileSelected}
           progress={progress}
-          error={error}
+          error={uploadError}
+          initialFile={initialFile}
         />
         <Link
           to="/products"

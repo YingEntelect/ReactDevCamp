@@ -8,14 +8,15 @@ import {
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 
 import type { FileUploadModalProps } from "./types";
+import { Link } from "react-router";
 
 export const FileUploadModal: FC<FileUploadModalProps> = ({
   show = true,
   onClose,
   onFileSelected,
-  accept,
   progress = null,
   error = null,
+  initialFile,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -54,6 +55,16 @@ export const FileUploadModal: FC<FileUploadModalProps> = ({
         <h1 className="text-black">File upload</h1>
       </ModalHeader>
       <ModalBody className="bg-white rounded-b-sm">
+        {initialFile && (
+          <div>
+            <Link
+              to={initialFile.previewUrl}
+              className="text-blue-500 underline"
+            >
+              {initialFile.fileName}
+            </Link>
+          </div>
+        )}
         {isUploading ? (
           <div className="flex flex-col items-center justify-center gap-3 p-10">
             <div
@@ -90,7 +101,6 @@ export const FileUploadModal: FC<FileUploadModalProps> = ({
             <input
               ref={inputRef}
               type="file"
-              accept={accept}
               onChange={handleChange}
               className="hidden"
             />

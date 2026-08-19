@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
+import type { KycDocumentKind } from "./types";
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -13,3 +15,6 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 export const firebaseStorage = getStorage(firebaseApp);
+
+export const kycDocumentPath = (customerId: number, kind: KycDocumentKind) =>
+  `kyc-documents/${customerId}/${kind}`;

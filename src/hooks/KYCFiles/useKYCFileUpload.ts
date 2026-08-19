@@ -5,10 +5,11 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
-import { firebaseStorage, type KycDocumentKind } from "@project/services";
-
-const kycDocumentPath = (customerId: number, kind: KycDocumentKind) =>
-  `kyc-documents/${customerId}/${kind}`;
+import {
+  firebaseStorage,
+  kycDocumentPath,
+  type KycDocumentKind,
+} from "@project/services";
 
 export const useKYCFileUpload = () => {
   const [progress, setProgress] = useState<number | null>(null);
@@ -22,7 +23,10 @@ export const useKYCFileUpload = () => {
     const storageRef = ref(firebaseStorage, kycDocumentPath(customerId, kind));
     const uploadTask = uploadBytesResumable(storageRef, file, {
       contentType: file.type,
-      customMetadata: { uploadedAt: new Date().toISOString() },
+      customMetadata: {
+        uploadedAt: new Date().toISOString(),
+        originalFileName: file instanceof File ? file.name : "",
+      },
     });
 
     return new Promise<UploadTaskSnapshot>((resolve, reject) => {
