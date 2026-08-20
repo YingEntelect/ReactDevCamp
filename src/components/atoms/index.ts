@@ -6,3 +6,4 @@ export * from "./PasswordInput";
 export * from "./SearchBar";
 export * from "./ErrorToast";
 export * from "./ChevronButton";
+export * from "./ProgressBar";
