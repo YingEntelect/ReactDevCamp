@@ -11,7 +11,6 @@ import type { FileUploadAreaProps } from "./types";
 export const FileUploadArea: FC<FileUploadAreaProps> = ({ onFileSelected }) => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const browseButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -57,7 +56,7 @@ export const FileUploadArea: FC<FileUploadAreaProps> = ({ onFileSelected }) => {
         className="hidden"
       />
       <button
-        ref={browseButtonRef}
+        autoFocus
         type="button"
         onClick={() => inputRef.current?.click()}
         className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"

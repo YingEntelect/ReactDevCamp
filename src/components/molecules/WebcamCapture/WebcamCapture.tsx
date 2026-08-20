@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FC } from "react";
+import { useRef, useState, type FC } from "react";
 import Webcam from "react-webcam";
 
 import type { WebcamCaptureProps } from "./types";
@@ -18,15 +18,10 @@ export const WebcamCapture: FC<WebcamCaptureProps> = ({
   onSendingChange,
 }) => {
   const webcamRef = useRef<Webcam>(null);
-  const captureButtonRef = useRef<HTMLButtonElement>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);
   const [mediaError, setMediaError] = useState<string | null>(null);
   const isBusy = isSending || !!mediaError;
-
-  useEffect(() => {
-    captureButtonRef.current?.focus();
-  }, []);
 
   const handleCapture = async () => {
     if (isBusy) return;
@@ -88,7 +83,7 @@ export const WebcamCapture: FC<WebcamCaptureProps> = ({
         Position your document in the frame, then press Capture.
       </p>
       <button
-        ref={captureButtonRef}
+        autoFocus
         type="button"
         onClick={handleCapture}
         aria-disabled={isBusy}

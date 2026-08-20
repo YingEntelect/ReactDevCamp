@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { Link } from "react-router";
 
@@ -21,8 +21,6 @@ export const FileUploadModal: FC<FileUploadModalProps> = ({
   error = null,
   initialFile,
 }) => {
-  const browseButtonRef = useRef<HTMLButtonElement>(null);
-  const isFirstModeRenderRef = useRef(true);
   const [mode, setMode] = useState<Mode>("upload");
   const [prevShow, setPrevShow] = useState(show);
   const [isCaptureSending, setIsCaptureSending] = useState(false);
@@ -40,17 +38,6 @@ export const FileUploadModal: FC<FileUploadModalProps> = ({
       setMode("upload");
     }
   }
-
-  useEffect(() => {
-    if (isFirstModeRenderRef.current) {
-      isFirstModeRenderRef.current = false;
-      return;
-    }
-
-    if (mode === "upload") {
-      browseButtonRef.current?.focus();
-    }
-  }, [mode]);
 
   return (
     <Modal dismissible={!isUploading} show={show} onClose={onClose}>
