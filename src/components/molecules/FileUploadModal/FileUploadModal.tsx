@@ -1,6 +1,5 @@
 import { useState, type FC } from "react";
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { Link } from "react-router";
 
 import {
   FileUploadArea,
@@ -47,12 +46,14 @@ export const FileUploadModal: FC<FileUploadModalProps> = ({
       <ModalBody className="bg-white rounded-b-sm flex flex-col gap-4">
         {initialFile && (
           <div>
-            <Link
-              to={initialFile.previewUrl}
+            <a
+              href={initialFile.previewUrl}
+              target="_blank"
+              rel="noreferrer"
               className="text-blue-500 underline"
             >
               {initialFile.fileName}
-            </Link>
+            </a>
           </div>
         )}
         {error && (

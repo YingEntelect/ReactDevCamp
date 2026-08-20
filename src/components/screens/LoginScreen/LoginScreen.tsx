@@ -2,12 +2,8 @@ import { useState, type FC } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 
 import { LoginForm } from "@project/components";
-import {
-  useAuthToken,
-  useCustomerProfile,
-  fetchKYCFiles,
-  type KYCFilePreview,
-} from "@project/hooks";
+import { useAuthToken, useCustomerProfile } from "@project/hooks";
+import { fetchKYCFiles, type KYCFilePreview } from "@project/services";
 
 export const LoginScreen: FC = () => {
   const { isAuthenticated } = useAuthToken();
