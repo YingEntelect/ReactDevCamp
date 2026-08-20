@@ -18,7 +18,8 @@ export const KYCSubmissionScreen: FC = () => {
 
   const { uploadFile, progress, error: uploadError } = useKYCFileUpload();
   const { data: customer } = useCustomerProfile();
-  const { file, refetch } = useKYCFilePreview(customer?.id ?? -1, uploadMode);
+  const { proofOfResidence, selfie, refetch } = useKYCFilePreview(customer?.id);
+  const file = uploadMode === "proofOfResidence" ? proofOfResidence : selfie;
 
   const initialFile =
     file.previewUrl && file.fileName && file.fileSize !== null
@@ -89,7 +90,7 @@ export const KYCSubmissionScreen: FC = () => {
           to="/products"
           className="text-blue-500 underline w-full text-center"
         >
-          Continue as a guest
+          Skip
         </Link>
       </div>
     </div>
